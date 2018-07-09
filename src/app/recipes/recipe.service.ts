@@ -22,7 +22,6 @@ export class RecipeService {
                'https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18180350/051SIP112-grilled-mustard-rosemary-chicken-recipe-alt-main.jpg',
                [new Ingredient('Buns', 2),
                new Ingredient('Meat',1)])
-
   ];
 
   getRecipes() {
@@ -44,6 +43,11 @@ export class RecipeService {
 
   updateRecipe(index: number, newRecipe : Recipe) {
     this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index : number) {
+    this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
   }
 
